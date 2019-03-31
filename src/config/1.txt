@@ -1,0 +1,44 @@
+数据交互：
+配置axios，在plugins里面写axios的配置文件，引入axios,绑定全局，window.axios = axios;
+
+绑在Vue身上，引入Vue，绑在Vue.prototype.$axios = axios,配置全局资源在mian文件里。
+
+import axios from './plugins/axios',在home里面拿到axios;
+
+本地数据在public下的data，
+axios({
+    url:baseUrl + '/data/index.data',
+}).then(
+    res=>console.log(res)
+)
+
+远端的数据在node后台里，跨域，要么后端允许访问，要么前端跨域，代理
+axios({
+    url:baseUrl + 'api/prooduct'
+}).then(
+    res => console.log('res',res.data)
+)
+
+前端跨域代理：
+在vue.config.js 中
+ proxy:{
+    '/api':{   //api就是target + api
+        target:'http://47.100.222.26:80',
+        changeOrigin:true,
+        ws:true,
+    },
+    '/douban':{// axios 访问 /douban == target + '/douban'
+        target:'https://api.douban.com',
+        changeOrigin:true,
+        pathRewrite:{//路径替换
+        '^/douban':'',// axios 访问/douban/v2 == target + /v2
+        }
+    }
+}
+公共组件的显示情况：
+    1.在main.js里面设置一个布尔值：true为显示，false是隐藏；
+    2.在公共组件上设置v-show,或者v-if;两种方法的效果差不多，但是性能上有差别
+    3.在各个组件中挂载下设置是否显示
+
+路由守卫：
+    

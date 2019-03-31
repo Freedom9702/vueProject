@@ -1,0 +1,10 @@
+[{  "error":0,
+    "msg":"自动登录",
+    "id":1,
+    "username":"abc",
+    "password":"123"
+},
+{
+    "error":1,
+    "msg":"未登录"
+}]
